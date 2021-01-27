@@ -11,15 +11,15 @@
   return new Promise((resolve, reject) => {
       const inputnumber=Number(window.prompt("enter a number btw(1-6)") );  
        const randomnumber=Math.floor(Math.random()*6+1);
-       if(isNaN(inputnumber)){
-           reject(new Error("wrong number"));
+       if(isNaN(inputnumber)||inputnumber==" "|| inputnumber>6){
+           reject(new Error("wrong Input"));
        }
        if( inputnumber==randomnumber){
            resolve  ({
                points:2,randomnumber,
            });
         }
-           else if(inputnumber==randomnumber-1 || inputnumber==randomnumber+1){
+           else if(Math.abs(inputnumber-randomnumber)==1){
                resolve({
                    points:1,randomnumber,
                });}
@@ -41,7 +41,8 @@
   const handleGuess = () => {
   enterNumber() 
     .then((result) => {
-     console.log(`Random Number: ${result.randomnumber}: your score ${result.points} points`); 
+        
+     console.log(` randomNumber generated: ${result.randomnumber}: your score ${result.points} points`); 
    
       continueGame().then((result) => {
         if (result) {
